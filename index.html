@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Reactvite-Ts-Grider</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import * as esbuild from './node_modules/esbuild-wasm/esm/browser.min.js'
+      // console.log(esbuild)
+      const input = `
+        const App = () => {
+          return <>
+            <h2>Hello boys!!!</h2>
+          </>
+        }
+      `
+      esbuild
+        .initialize({
+          wasmURL: './node_modules/esbuild-wasm/esbuild.wasm',
+        })
+        .then((d) => {
+          let result = esbuild.transform(input, {
+            loader: 'jsx',
+            target: 'es2016',
+          })
+          result.then((d) => {
+            // console.log(d)
+          })
+        })
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
